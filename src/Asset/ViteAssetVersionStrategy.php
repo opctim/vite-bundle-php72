@@ -8,15 +8,39 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class ViteAssetVersionStrategy implements VersionStrategyInterface
 {
-    private string $publicPath;
-    private array $builds;
+    /**
+     * @var string
+     */
+    private $publicPath;
 
-    private string $manifestPath;
-    private string $entrypointsPath;
+    /**
+     * @var mixed[]
+     */
+    private $builds;
+
+    /**
+     * @var string
+     */
+    private $manifestPath;
+
+    /**
+     * @var string
+     */
+    private $entrypointsPath;
+
     private $manifestData = null;
+
     private $entrypointsData = null;
-    private ?array $build = null;
-    private bool $strictMode;
+
+    /**
+     * @var mixed[]|null
+     */
+    private $build;
+
+    /**
+     * @var bool
+     */
+    private $strictMode;
 
     public function __construct(string $publicPath, array $builds, string $defaultBuildName, bool $strictMode = true)
     {
@@ -62,14 +86,14 @@ class ViteAssetVersionStrategy implements VersionStrategyInterface
 
             if (is_file($this->manifestPath)) {
                 try {
-                    $this->manifestData = json_decode(file_get_contents($this->manifestPath), true, 512, \JSON_THROW_ON_ERROR);
+                    $this->manifestData = json_decode(file_get_contents($this->manifestPath), true, 512, 0);
                 } catch (\JsonException $e) {
                     throw new RuntimeException(sprintf('Error parsing JSON from entrypoints file "%s": ', $this->manifestPath).$e->getMessage(), 0, $e);
                 }
             } else {
                 $this->manifestData = false;
                 try {
-                    $this->entrypointsData = json_decode(file_get_contents($this->entrypointsPath), true, 512, \JSON_THROW_ON_ERROR);
+                    $this->entrypointsData = json_decode(file_get_contents($this->entrypointsPath), true, 512, 0);
                 } catch (\JsonException $e) {
                     throw new RuntimeException(sprintf('Error parsing JSON from entrypoints file "%s": ', $this->manifestPath).$e->getMessage(), 0, $e);
                 }

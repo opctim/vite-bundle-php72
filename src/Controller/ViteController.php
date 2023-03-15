@@ -9,8 +9,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class ViteController
 {
     public $httpClient;
-    public string $defaultBuild;
-    public array $builds;
+
+    /**
+     * @var string
+     */
+    public $defaultBuild;
+
+    /**
+     * @var mixed[]
+     */
+    public $builds;
+
     private $entrypointsLookup;
 
     public function __construct(
