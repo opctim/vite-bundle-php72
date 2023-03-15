@@ -1,5 +1,5 @@
 {
-    "name": "pentatrion/vite-bundle",
+    "name": "opctim/vite-bundle-php72",
     "description": "Vite integration for your Symfony app",
     "keywords": [
         "bundle",
@@ -13,6 +13,10 @@
         {
             "name": "Hugues Tavernier",
             "email": "hugues.tavernier@protonmail.com"
+        },
+        {
+            "name": "opctim",
+            "homepage": "https://github.com/opctim/"
         }
     ],
     "require": {
